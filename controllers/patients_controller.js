@@ -35,11 +35,11 @@ module.exports.registerPatients= async function(req, res){
 }
 
 
-module.exports.createReport= async function(req, res){
+module.exports.createReport=async function(req, res){
          
     try {
          let patient=Patient.findById(req.params.id);
-         
+
           if(patient){
             let report = await Report.create({
                 doctor: req.body.doctor,
@@ -72,6 +72,28 @@ module.exports.createReport= async function(req, res){
         return res.status(500).send({
             err: error,
             isReportCreated: false,
+            message: 'Internal Server Error',
+        });
+    }
+}
+
+
+//get all reports of patients
+module.exports.getAllPatientReports= async function(req, res){
+    try {
+        let reports = await Report.find({patient: req.params.id});
+
+        if(reports){
+            return res.status(200).send({
+                reports: reports,
+                message: "All Reports of patient"
+            })
+        }
+
+
+    } catch (error) {
+        console.log('Internal Server Error',error);
+        return res.status(500).send({
             message: 'Internal Server Error',
         });
     }
