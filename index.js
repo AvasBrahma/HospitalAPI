@@ -2,6 +2,9 @@
 const express=require('express');
 const db=require('./config/mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+const passportJwt = require('./config/passport-jwt-strategy');
+const session = require('express-session');
 
 const app=express();
 
@@ -10,6 +13,9 @@ const app=express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
+    //initialize passport
+    app.use(passport.initialize());
 
 
 

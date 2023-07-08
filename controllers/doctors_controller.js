@@ -1,4 +1,5 @@
-const Doctor=require('../model/doctor');
+const Doctor = require('../model/doctor');
+const jwt=require('jsonwebtoken');
 
 
 module.exports.registerDoctor= async function(req, res){
@@ -33,8 +34,18 @@ try {
 module.exports.login= async function(req, res){
     
   console.log("Login Doctor.......");
+  let doctor= await Doctor.findOne({username: req.body.username})
+  if(!doctor || doctor.password!=req.body.password){
+     return res.json(422, {
+       message: "Invalid username or password"
+     });
+  }
+
   return res.status(200).send({
-    message: "Doctor Login"
+    message: "Doctor Login Successfully, here is your token",
+    data:{
+      token: jwt.sign(doctor.toJSON(), 'test123', { expiresIn: '100000'})
+    }
   })
 
 }
