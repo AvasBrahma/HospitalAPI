@@ -12,11 +12,10 @@ const app=express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-
     //initialize passport
     app.use(passport.initialize());
 
+    
 
 
 app.use('/',require('./routes'));

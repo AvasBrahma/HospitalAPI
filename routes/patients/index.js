@@ -6,6 +6,6 @@ const patients_controller=require('../../controllers/patients_controller');
 
 router.post('/register', passport.authenticate('jwt', {session: false}), patients_controller.registerPatients)
 
-
+router.post('/:id/create-report', passport.authenticate('jwt', {session: false}), patients_controller.createReport);
 
 module.exports=router;
