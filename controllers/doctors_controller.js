@@ -7,7 +7,16 @@ module.exports.registerDoctor= async function(req, res){
 try {
 
    console.log("Doctor request to resgister", req.body);
-  
+
+   // validating doctor is already present in DB or not
+   let doctor = await Doctor.findOne({ username: req.body.username });
+        if (doctor) {
+            return res.status(200).send({
+                isRegistered: false,
+                message: 'Doctor already exist',
+            });
+        }
+
   let newDoctor = await Doctor.create({
       fullname: req.body.fullname,
       username: req.body.username,
