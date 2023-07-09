@@ -8,16 +8,15 @@ const session = require('express-session');
 
 const app=express();
 
-
-
+// Middleware setup
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-    //initialize passport
-    app.use(passport.initialize());
+//initialize passport
+app.use(passport.initialize());
+
 
     
-
-
+// setting up routes 
 app.use('/',require('./routes'));
 
 // Start the server

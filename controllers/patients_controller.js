@@ -1,10 +1,14 @@
+const moment = require('moment');
 const Patient=require('../model/patients');
 const Report=require('../model/report');
 
+
+// Function to reagister Patients in DB 
 module.exports.registerPatients= async function(req, res){
     try {
-        let patient = await Patient.findOne({phone: req.body.phone});
 
+        // Check Patients with same phone number already exits in DB
+        let patient = await Patient.findOne({phone: req.body.phone});
         if(patient){
             return res.status(200).send({
                 patient:patient,
@@ -35,6 +39,7 @@ module.exports.registerPatients= async function(req, res){
 }
 
 
+//Funtions to create report by using doctor id and patients id
 module.exports.createReport=async function(req, res){
          
     try {

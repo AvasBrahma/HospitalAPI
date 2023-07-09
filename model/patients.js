@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+require('mongoose-dateonly')(mongoose);
 
 const patientSchema = new mongoose.Schema({
     name: {
@@ -10,7 +11,7 @@ const patientSchema = new mongoose.Schema({
         required: true
     },
     dateofbirth: {
-        type: Date,
+        type: mongoose.Schema.Types.DateOnly,
         required: true
     },
     gender: {
